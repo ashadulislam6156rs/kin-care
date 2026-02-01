@@ -42,7 +42,7 @@ const LoginForm = () => {
       callbackUrl: "/",
     });
     if (res?.ok) {
-      alert("Login successful");
+     toast.success("Login successful");
     }
 
     if (res?.error) {
@@ -50,11 +50,14 @@ const LoginForm = () => {
       setLoading(false);
     }
   };
+  if (error) {
+    toast.error(error);
+  }
 
   return (
     <div className="max-w-5xl mx-auto ">
       <div className="m-5 md:bg-gradient-to-br overflow-hidden md:from-slate-50 md:via-emerald-50 md:to-teal-50 shadow-2xl rounded-2xl flex flex-col lg:flex-row items-center justify-center font-sans">
-        <title>Create Account | SmartGarden</title>
+        <title>Create Account | KinCare</title>
         {/* Right Side: Visual Section */}
         <div className="hidden lg:flex w-full lg:w-1/2 flex-col items-center justify-center relative p-8">
           {/* Decorative circles */}
@@ -65,18 +68,19 @@ const LoginForm = () => {
             <div className="avatar mb-6">
               <div className="w-64 h-64 rounded-xl shadow-2xl dark:shadow-gray-950/50 ring ring-primary dark:ring-blue-500 ring-offset-base-100 dark:ring-offset-gray-800 ring-offset-2 overflow-hidden mx-auto">
                 <img
-                  src="https://i.pinimg.com/736x/f5/8b/a7/f58ba7997d773b6897a1110f2d3479f9.jpg"
+                  src="https://i.pinimg.com/736x/4a/90/33/4a903338c0e478248153bd8f3f6f6745.jpg"
                   className="object-cover w-full h-full"
                 />
               </div>
             </div>
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-extrabold text-emerald-700 dark:text-emerald-400 mb-3 tracking-tight">
+              <h2 className="text-3xl font-extrabold text-accent dark:text-emerald-400 mb-3 tracking-tight">
                 Grow Your Joy!
               </h2>
 
               <p className="text-gray-600 dark:text-gray-400 max-w-xs mx-auto text-sm leading-relaxed">
-                Sign in to access your <strong>SmartGarden</strong> account,
+                Sign in to access your{" "}
+                <strong className="text-secondary">KinCare</strong> account,
                 track your plant orders, and explore new garden products.
               </p>
             </div>
@@ -113,7 +117,7 @@ const LoginForm = () => {
                   placeholder="Enter your email"
                 />
                 <InputGroupAddon>
-                  <MailIcon className="text-emerald-500 w-5 h-5" />
+                  <MailIcon className="text-accent w-5 h-5" />
                 </InputGroupAddon>
               </InputGroup>
               {errors.email && (
@@ -131,7 +135,7 @@ const LoginForm = () => {
                 </Label>
                 <Link
                   href="/forgot-password"
-                  className="text-xs text-emerald-600 hover:underline"
+                  className="text-xs text-accent hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -145,7 +149,7 @@ const LoginForm = () => {
                   placeholder="Enter your password"
                 />
                 <InputGroupAddon>
-                  <LockKeyhole className="text-emerald-500 w-5 h-5" />
+                  <LockKeyhole className="text-accent w-5 h-5" />
                 </InputGroupAddon>
                 <InputGroupAddon
                   className="cursor-pointer"
@@ -169,7 +173,7 @@ const LoginForm = () => {
             <Button
               disabled={loading}
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-700 h-11"
+              className="w-full btnPrimary h-11"
             >
               {loading ? (
                 <Button
@@ -199,8 +203,9 @@ const LoginForm = () => {
             </div>
 
             <Button
+              onClick={() => signIn("google", { callbackUrl: "/" })}
               variant="outline"
-              className="w-full flex items-center justify-center gap-2 border-gray-200 h-11"
+              className="w-full hover:bg-gray-200 cursor-pointer flex items-center justify-center gap-2 border-gray-200 h-11"
             >
               <FcGoogle className="w-5 h-5" />
               Google
@@ -211,7 +216,7 @@ const LoginForm = () => {
             Don not have an account?{" "}
             <Link
               href="/register"
-              className="text-emerald-600 font-bold hover:underline"
+              className="text-accent font-bold hover:underline"
             >
               Sign Up
             </Link>

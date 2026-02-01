@@ -37,18 +37,10 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
 }
 /* #657EFF */
 
 :root {
-  --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: #231f3f;
   --card: oklch(1 0 0);
@@ -123,4 +115,13 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+
+.btnPrimary{
+  @apply bg-accent hover:bg-primary cursor-pointer transition-all ease-in-out duration-700
+}
+
+.btnSecondary{
+@apply bg-primary hover:bg-secondary cursor-pointer transition-all ease-in-out duration-700
 }

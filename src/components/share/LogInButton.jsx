@@ -1,34 +1,41 @@
 "use client";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { Button } from "../ui/button";
+import { IoLogOutOutline } from "react-icons/io5";
+import { LuArrowRightToLine } from "react-icons/lu";
+import useAuth from "@/hooks/useAuth";
+import Image from "next/image";
 
 export default function LogInButton() {
-    const { data: session } = useSession();
+  const { session, user } = useAuth();
     
   if (session) {
     return (
-      <>
-        Signed in as {session.user.email} <br />
+      <div className="flex flex-col-reverse md:flex-row md:items-center gap-3">
         <Button
-          className="cursor-pointer hover:text-black hover:bg-secondary-foreground bg-accent text-white"
+          className="btnPrimary text-white"
           variant="goast"
           size="sm"
           onClick={() => signOut()}
         >
-          Sign out
+          <IoLogOutOutline /> Sign out
         </Button>
-      </>
+
+        <div className="border-2 border-secondary overflow-hidden w-10 h-10 rounded-full flex justify-center items-center">
+          <Image src={user.image} height={30} width={30} alt="User image" />
+        </div>
+      </div>
     );
   }
   return (
     <>
-      Not signed in <br />
       <Button
-        className="cursor-pointer hover:text-black bg-accent hover:bg-secondary-foreground text-white"
+        className="cursor-pointer w-full md:w-auto btnPrimary text-white"
         variant="goast"
         size="sm"
         onClick={() => signIn()}
       >
+        <LuArrowRightToLine />
         Sign in
       </Button>
     </>
