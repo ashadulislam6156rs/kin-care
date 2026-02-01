@@ -1,15 +1,18 @@
 "use client";
 
+import Loading from "@/components/Loading/Loading";
+import useAuth from "@/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 
 const ServicesDetails =  () => {
   const params =  useParams();
   const router = useRouter();
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
+  const { isAuthenticated } = useAuth();
+
 
   const { data: service, isLoading } = useQuery({
     queryKey: ["service", params.serviceId],
@@ -18,13 +21,21 @@ const ServicesDetails =  () => {
       return res.data;
     },
   });
+
+
+  const handleBookNow = () => {
+    if (isAuthenticated) {
+      router.push("/booking")
+    }
+    else {
+      router.push("/login");
+    }
+  }
     
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
-      </div>
+      <Loading></Loading>
     );
   }
 
@@ -53,16 +64,18 @@ const ServicesDetails =  () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-5 md:px-7 py-12">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Left Column - Service Details */}
           <div className="lg:col-span-2 space-y-6">
             {/* Image Gallery */}
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
               <div className="relative h-96">
-                <img
+                <Image
                   src={service?.image}
                   alt={service?.title}
+                  width={200}
+                  height={100}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-6 left-6">
@@ -267,46 +280,16 @@ const ServicesDetails =  () => {
                 <p className="text-sm text-gray-600">Best price guaranteed</p>
               </div>
 
-              {/* Booking Form */}
-              <div className="space-y-4 mb-6">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Select Date
-                  </label>
-                  <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    min={new Date().toISOString().split("T")[0]}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Select Time
-                  </label>
-                  <select
-                    value={selectedTime}
-                    onChange={(e) => setSelectedTime(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    <option value="">Choose a time</option>
-                    <option value="morning">Morning (8 AM - 12 PM)</option>
-                    <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
-                    <option value="evening">Evening (4 PM - 8 PM)</option>
-                    <option value="night">Night (8 PM - 12 AM)</option>
-                  </select>
-                </div>
-              </div>
-
-              <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 mb-4">
-                Book Now
+              <button
+                onClick={handleBookNow}
+                className="btnPrimary w-full rounded-xl py-2 px-4 text-white"
+              >
+                Book Service
               </button>
 
-              <button className="w-full border-2 border-blue-600 text-blue-600 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300">
+              {/* <button className="w-full border-2 border-blue-600 text-blue-600 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300">
                 Add to Cart
-              </button>
+              </button> */}
 
               {/* Trust Badges */}
               <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">

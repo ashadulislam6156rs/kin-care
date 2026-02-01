@@ -14,7 +14,7 @@ const Services = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className=" bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Hero Section */}
       <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-600 py-20 px-4">
         <div className="absolute inset-0 bg-black opacity-10"></div>
@@ -33,10 +33,10 @@ const Services = () => {
       </div>
 
       {/* Services Grid Section */}
-      <div className="max-w-7xl mx-auto px-4 py-16">
+      <div className="max-w-7xl mx-auto px-5 md:px-7 py-16">
         {isLoading ? (
           // Loading skeleton
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
                 key={i}
@@ -50,7 +50,7 @@ const Services = () => {
             ))}
           </div>
         ) : services?.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {services.map((service) => (
               <ServicesCard key={service._id} service={service} />
             ))}

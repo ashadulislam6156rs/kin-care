@@ -1,13 +1,16 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const ServicesCard = ({ service }) => {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 hover:shadow-lg transition">
+    <div className="bg-white h-94 rounded-xl border border-gray-200 hover:shadow-lg transition">
       {/* Image */}
       <div className="relative h-44">
-        <img
+        <Image
           src={service.image}
           alt={service.title}
+          height={40}
+          width={200}
           className="w-full h-full object-cover rounded-t-xl"
         />
         <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs px-3 py-1 rounded-full">
@@ -18,7 +21,9 @@ const ServicesCard = ({ service }) => {
       {/* Content */}
       <div className="p-5">
         <h3 className="text-lg font-semibold text-gray-800 mb-1">
-          {service.title}
+          {service.title.length > 25
+            ? service.title.slice(0, 25) + "..."
+            : service.title}
         </h3>
 
         <p className="text-sm text-gray-600 line-clamp-2 mb-3">
@@ -41,7 +46,7 @@ const ServicesCard = ({ service }) => {
           </span>
 
           <Link href={`/services/${service._id}`}>
-            <button className="text-sm font-medium text-blue-600 border border-blue-600 px-4 py-1.5 rounded-lg hover:bg-blue-600 hover:text-white transition">
+            <button className="text-sm cursor-pointer font-medium text-blue-600 border border-blue-600 px-4 py-1.5 rounded-lg hover:bg-blue-600 hover:text-white duration-700 transition-colors">
               Details
             </button>
           </Link>
