@@ -1,6 +1,7 @@
 "use client";
 
 import Loading from "@/components/Loading/Loading";
+import { Button } from "@/components/ui/button";
 import useAuth from "@/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -25,7 +26,7 @@ const ServicesDetails =  () => {
 
   const handleBookNow = () => {
     if (isAuthenticated) {
-      router.push("/booking")
+      router.push(`/booking/${service._id}`);
     }
     else {
       router.push("/login");
@@ -280,12 +281,12 @@ const ServicesDetails =  () => {
                 <p className="text-sm text-gray-600">Best price guaranteed</p>
               </div>
 
-              <button
+              <Button
                 onClick={handleBookNow}
-                className="btnPrimary w-full rounded-xl py-2 px-4 text-white"
+                className="btnPrimary cursor-pointer w-full rounded-xl py-2 px-4 text-white"
               >
                 Book Service
-              </button>
+              </Button>
 
               {/* <button className="w-full border-2 border-blue-600 text-blue-600 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-all duration-300">
                 Add to Cart

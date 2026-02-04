@@ -13,9 +13,10 @@ import LogInButton from "./LogInButton";
 import { FiUserPlus } from "react-icons/fi";
 import useAuth from "@/hooks/useAuth";
 
+
 const Navbar = () => {
   const router = useRouter();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   // ** Active Path

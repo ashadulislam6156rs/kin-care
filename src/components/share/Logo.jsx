@@ -5,7 +5,7 @@ import React from 'react';
 
 const Logo = () => {
     return (
-      <Link href={"/"} className="flex-1 flex gap-1 items-center">
+      <Link href={"/"} className=" flex gap-1 items-center">
         <Image
           src={"/assets/kinCare-logo.png"}
           width={27}
