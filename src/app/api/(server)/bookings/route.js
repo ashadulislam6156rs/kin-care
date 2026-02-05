@@ -30,3 +30,27 @@ export async function POST(req) {
     );
   }
 }
+
+export async function GET(req) {
+  try {
+    const email = await req.nextUrl.searchParams.get("email");
+
+    // Basic validation
+    if (!email) {
+      return NextResponse.json({ error: "Email required" }, { status: 400 });
+    }
+
+    const cursor =  dbConnect(collections.BOOKINGS)
+      .find({ email })
+      const result = await cursor.toArray();
+
+    // client.close();
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Failed to bookings data" },
+      { status: 500 },
+    );
+  }
+}

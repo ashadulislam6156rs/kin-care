@@ -23,7 +23,7 @@ import React from "react";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import Loading from "@/components/Loading/Loading";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+
 import { toast } from "react-toastify";
 import { BookingDetailsDialog } from "@/components/booking/BookingDetails";
 
