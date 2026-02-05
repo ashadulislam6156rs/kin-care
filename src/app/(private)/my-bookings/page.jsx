@@ -2,7 +2,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableFooter,
   TableHead,
@@ -21,22 +20,17 @@ import useAuth from "@/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React from "react";
-import {
-  Calendar,
-  Clock,
-  MapPin,
-  DollarSign,
-  Package,
-  User,
-  Mail,
-} from "lucide-react";
+import { Calendar, Clock, MapPin } from "lucide-react";
 import Loading from "@/components/Loading/Loading";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { toast } from "react-toastify";
+import { BookingDetailsDialog } from "@/components/booking/BookingDetails";
 
 const MyBookings = () => {
   const { user } = useAuth();
-    const statusSteps = ["Pending", "Confirmed", "Completed"];
 
-  const { data: bookings, isLoading } = useQuery({
+  const { data: bookings, isLoading, refetch } = useQuery({
     queryKey: ["bookings"],
     queryFn: async () => {
       const res = await axios.get(
@@ -47,9 +41,6 @@ const MyBookings = () => {
   });
 
 
-  const currentStatus =
-    bookings && bookings.length > 0 ? bookings[0]?.bookingStatus : "Pending";
-
 
   const getStatusColor = (status) => {
     switch (status?.toLowerCase()) {
@@ -57,9 +48,12 @@ const MyBookings = () => {
         return "bg-amber-50 text-amber-700 border-amber-200";
       case "confirmed":
         return "bg-emerald-50 text-emerald-700 border-emerald-200";
-      default:
+      case "completed":
         return "bg-accent/10 text-accent border-accent/30";
-     
+      case "cancelled":
+        return "bg-destructive/10 text-destructive border-destructive/30";
+      default:
+        return "bg-muted text-muted-foreground border-border";
     }
   };
 
@@ -72,10 +66,25 @@ const MyBookings = () => {
     });
   };
 
+  const handleCancelBooking = async (bookingId) => {
+    const updateInfo = {
+      bookingId,
+      bookingStatus: "Cancelled",
+    };
+
+    await axios
+      .patch(`/api/bookings/my-bookings?email=${user?.email}`, updateInfo)
+      .then(() => {
+        toast.success("Booking Cancelled Successfully");
+        refetch();
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
+
   if (isLoading) {
-    return (
-      <Loading></Loading>
-    );
+    return <Loading></Loading>;
   }
 
   return (
@@ -87,55 +96,6 @@ const MyBookings = () => {
           View and manage all your service bookings
         </p>
       </div>
-
-      {/* Track line if Pending / Confirmed / Completed */}
-      {bookings?.length > 0 && (
-        <div className="w-full max-w-md mx-auto mb-10">
-          <div className="flex items-center justify-between relative">
-            {/* background line */}
-            <div className="absolute top-1/2 left-0 w-full h-1 bg-muted -translate-y-1/2" />
-
-            {/* active line */}
-            <div
-              className="absolute top-1/2 left-0 h-1 bg-accent -translate-y-1/2 transition-all duration-300"
-              style={{
-                width:
-                  currentStatus === "Pending"
-                    ? "4%"
-                    : currentStatus === "Confirmed"
-                      ? "50%"
-                      : "100%",
-              }}
-            />
-
-            {statusSteps.map((step, index) => {
-              const isActive = statusSteps.indexOf(currentStatus) >= index;
-
-              return (
-                <div
-                  key={step}
-                  className="relative z-10 flex flex-col items-center"
-                >
-                  {/* circle */}
-                  <div
-                    className={`w-3 h-3 mt-5 rounded-full border-2 transition-all
-                ${
-                  isActive
-                    ? "bg-chart-2 border-destructive"
-                    : "bg-background border-muted"
-                }`}
-                  />
-
-                  {/* label */}
-                  <span className="text-xs mt-1 text-muted-foreground">
-                    {step}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
 
       {/* Desktop View - Table */}
       <div className="hidden lg:block bg-card rounded-lg shadow-sm border border-border overflow-hidden">
@@ -159,6 +119,9 @@ const MyBookings = () => {
               </TableHead>
               <TableHead className="font-semibold text-foreground">
                 Status
+              </TableHead>
+              <TableHead className="font-semibold text-foreground">
+                Actions
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -230,6 +193,41 @@ const MyBookings = () => {
                       {booking.bookingStatus}
                     </Badge>
                   </TableCell>
+                  <TableCell>
+                    <div className="flex gap-2 items-center">
+                      <BookingDetailsDialog
+                        booking={booking}
+                        trigger={
+                          <Button
+                            className="bg-secondary text-white cursor-pointer"
+                            size="xs"
+                            variant="ghost"
+                          >
+                            Details
+                          </Button>
+                        }
+                      />
+
+                      {booking.bookingStatus === "Cancelled" ? (
+                        <Button
+                          className={`bg-destructive opacity-50 text-white cursor-not-allowed`}
+                          size="xs"
+                          variant="goast"
+                        >
+                          Cancel
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => handleCancelBooking(booking._id)}
+                          className={`bg-destructive text-white cursor-pointer`}
+                          size="xs"
+                          variant="goast"
+                        >
+                          Cancel
+                        </Button>
+                      )}
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
@@ -247,7 +245,7 @@ const MyBookings = () => {
             <TableFooter>
               <TableRow className="bg-muted/50 hover:bg-muted/50">
                 <TableCell
-                  colSpan={4}
+                  colSpan={5}
                   className="font-semibold text-foreground"
                 >
                   Total Bookings
@@ -268,8 +266,8 @@ const MyBookings = () => {
       </div>
 
       {/* Mobile View - Cards */}
-      <div className="lg:hidden space-y-4">
-        {bookings?.length > 0 ? (
+      <div className="lg:hidden block space-y-4">
+        {bookings.length > 0 ? (
           bookings.map((booking, index) => (
             <Card
               key={index}
@@ -363,6 +361,43 @@ const MyBookings = () => {
                 <div className="pt-2 text-xs text-muted-foreground border-t border-border/50">
                   Booked on {formatDate(booking.createdAt)}
                 </div>
+
+                <div>
+                  <TableCell>
+                    <div className="flex gap-2 items-center">
+                      <BookingDetailsDialog
+                        booking={booking}
+                        trigger={
+                          <Button
+                            className="bg-secondary text-white cursor-pointer"
+                            size="sm"
+                            variant="ghost"
+                          >
+                            Details
+                          </Button>
+                        }
+                      />
+                      {booking.bookingStatus === "Cancelled" ? (
+                        <Button
+                          className={`bg-destructive opacity-50 text-white cursor-not-allowed`}
+                          size="sm"
+                          variant="goast"
+                        >
+                          Cancel
+                        </Button>
+                      ) : (
+                        <Button
+                          onClick={() => handleCancelBooking(booking._id)}
+                          className={`bg-destructive text-white cursor-pointer`}
+                          size="sm"
+                          variant="goast"
+                        >
+                          Cancel
+                        </Button>
+                      )}
+                    </div>
+                  </TableCell>
+                </div>
               </CardContent>
             </Card>
           ))
@@ -375,34 +410,27 @@ const MyBookings = () => {
         )}
 
         {/* Mobile Footer */}
-        {bookings?.length > 0 && (
-          <Card className="bg-muted/30 border-2 border-accent/20">
-            <CardContent className="py-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">
-                    Total Bookings
-                  </p>
-                  <p className="text-lg font-semibold text-foreground">
-                    {bookings.length} booking(s)
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-muted-foreground">Total Amount</p>
-                  <p className="text-2xl font-bold text-primary">
-                    $
-                    {bookings
-                      .reduce(
-                        (sum, booking) => sum + (booking.totalCost || 0),
-                        0,
-                      )
-                      .toLocaleString()}
-                  </p>
-                </div>
+        <Card className="bg-muted/30 border-2 border-accent/20">
+          <CardContent className="py-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">Total Bookings</p>
+                <p className="text-lg font-semibold text-foreground">
+                  {bookings.length} booking(s)
+                </p>
               </div>
-            </CardContent>
-          </Card>
-        )}
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Total Amount</p>
+                <p className="text-2xl font-bold text-primary">
+                  $
+                  {bookings
+                    .reduce((sum, booking) => sum + (booking.totalCost || 0), 0)
+                    .toLocaleString()}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );

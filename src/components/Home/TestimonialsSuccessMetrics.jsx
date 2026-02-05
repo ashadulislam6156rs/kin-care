@@ -38,7 +38,7 @@ export default function TestimonialsSuccessMetrics() {
         "Finding a trustworthy babysitter was always stressful. This platform connected us with Maria, who has been amazing with our twins. The background check process gave us complete peace of mind.",
       highlight: "Life-changing service",
       location: "New York, NY",
-      color: "from-pink-500 to-rose-500",
+      color: "from-pink-400 to-rose-400",
     },
     {
       id: 2,
@@ -51,7 +51,7 @@ export default function TestimonialsSuccessMetrics() {
         "My father needed daily assistance after his surgery. The caregiver we found through this platform treats him with such dignity and respect. It's been a blessing for our entire family.",
       highlight: "Compassionate and professional",
       location: "Los Angeles, CA",
-      color: "from-blue-500 to-indigo-500",
+      color: "from-blue-400 to-indigo-400",
     },
     {
       id: 3,
@@ -64,7 +64,7 @@ export default function TestimonialsSuccessMetrics() {
         "During my husband's recovery from illness, we needed someone with medical experience. The platform matched us with a wonderful caregiver who understood his needs perfectly.",
       highlight: "Expert medical support",
       location: "Chicago, IL",
-      color: "from-emerald-500 to-teal-500",
+      color: "from-emerald-400 to-teal-400",
     },
     {
       id: 4,
@@ -77,7 +77,7 @@ export default function TestimonialsSuccessMetrics() {
         "As a single dad with a demanding job, this service has been invaluable. The caregiver is reliable, engaging with my son, and the booking system is so convenient.",
       highlight: "Reliable and convenient",
       location: "Austin, TX",
-      color: "from-amber-500 to-orange-500",
+      color: "from-amber-400 to-orange-400",
     },
   ];
 
@@ -88,7 +88,7 @@ export default function TestimonialsSuccessMetrics() {
       value: 10000,
       suffix: "+",
       icon: Users,
-      color: "from-violet-500 to-purple-500",
+      color: "from-violet-400 to-purple-400",
       description: "Trust us daily",
     },
     {
@@ -97,7 +97,7 @@ export default function TestimonialsSuccessMetrics() {
       value: 5000,
       suffix: "+",
       icon: Award,
-      color: "from-blue-500 to-cyan-500",
+      color: "from-blue-400 to-cyan-400",
       description: "Background checked",
     },
     {
@@ -106,7 +106,7 @@ export default function TestimonialsSuccessMetrics() {
       value: 500000,
       suffix: "+",
       icon: Clock,
-      color: "from-emerald-500 to-teal-500",
+      color: "from-emerald-400 to-teal-400",
       description: "Of quality care",
     },
     {
@@ -115,7 +115,7 @@ export default function TestimonialsSuccessMetrics() {
       value: 98,
       suffix: "%",
       icon: Heart,
-      color: "from-rose-500 to-pink-500",
+      color: "from-rose-400 to-pink-400",
       description: "Customer rating",
     },
   ];
@@ -140,9 +140,7 @@ export default function TestimonialsSuccessMetrics() {
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
     };
   }, []);
 
@@ -179,15 +177,12 @@ export default function TestimonialsSuccessMetrics() {
     return () => clearInterval(interval);
   }, []);
 
-  const nextTestimonial = () => {
+  const nextTestimonial = () =>
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const prevTestimonial = () => {
+  const prevTestimonial = () =>
     setCurrentTestimonial(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
-  };
 
   const formatNumber = (num) => {
     if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
@@ -198,20 +193,8 @@ export default function TestimonialsSuccessMetrics() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900"
+      className="relative py-20 lg:py-32 overflow-hidden"
     >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-violet-500/10 rounded-full blur-3xl animate-pulse-slow" />
-        <div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse-slow"
-          style={{ animationDelay: "1s" }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-3xl" />
-      </div>
-
-    
-
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div
@@ -219,22 +202,22 @@ export default function TestimonialsSuccessMetrics() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gradient-to-r from-violet-500/20 to-purple-500/20 border border-violet-500/30 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gradient-to-r from-violet-200/30 to-purple-200/30 border border-violet-300/30 backdrop-blur-sm">
             <Star className="w-4 h-4 text-violet-400" fill="currentColor" />
-            <span className="text-sm font-bold text-violet-300 tracking-wider uppercase">
+            <span className="text-sm font-bold text-violet-400 tracking-wider uppercase">
               Success Stories
             </span>
           </div>
 
           <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-            <span className="text-white">Trusted by Thousands of</span>
+            <span className="text-black">Trusted by Thousands of</span>
             <br />
             <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Happy Families
             </span>
           </h2>
 
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
             Real stories from families who found the perfect care through our
             platform
           </p>
@@ -246,7 +229,7 @@ export default function TestimonialsSuccessMetrics() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          {metrics.map((metric, index) => {
+          {metrics.map((metric) => {
             const Icon = metric.icon;
             const counterKey = metric.label.toLowerCase().replace(/\s+/g, "");
             const counterValue = counters[counterKey] || 0;
@@ -258,38 +241,28 @@ export default function TestimonialsSuccessMetrics() {
             return (
               <div
                 key={metric.id}
-                className="group relative bg-slate-800/50 backdrop-blur-xl rounded-2xl p-8 border border-slate-700/50 hover:border-violet-500/50 transition-all duration-500 hover:scale-105"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="group relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-gradient-to-br hover:from-violet-400 hover:to-pink-400 transition-all duration-500 hover:scale-105"
               >
-                {/* Glow effect on hover */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-br ${metric.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`}
+                  className={`absolute inset-0 bg-gradient-to-br ${metric.color} opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity duration-500`}
                 />
-
                 <div className="relative">
                   <div
                     className={`w-14 h-14 mb-4 rounded-xl bg-gradient-to-br ${metric.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500`}
                   >
                     <Icon className="w-7 h-7 text-white" strokeWidth={2} />
                   </div>
-
-                  <div className="text-4xl lg:text-5xl font-bold text-white mb-2">
+                  <div className="text-4xl lg:text-5xl font-bold text-black mb-2">
                     {displayValue}
                     {metric.suffix}
                   </div>
-
-                  <div className="text-sm font-semibold text-slate-400 mb-1">
+                  <div className="text-sm font-semibold text-gray-700 mb-1">
                     {metric.label}
                   </div>
-                  <div className="text-xs text-slate-500">
+                  <div className="text-xs text-gray-500">
                     {metric.description}
                   </div>
                 </div>
-
-                {/* Corner accent */}
-                <div
-                  className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br ${metric.color} opacity-10 rounded-2xl blur-xl`}
-                />
               </div>
             );
           })}
@@ -302,11 +275,9 @@ export default function TestimonialsSuccessMetrics() {
           }`}
         >
           <div className="relative">
-            {/* Main testimonial card */}
-            <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-2xl rounded-3xl p-8 lg:p-12 border border-slate-700/50 shadow-2xl overflow-hidden">
-              {/* Decorative corner gradient */}
+            <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-white/20 shadow-2xl overflow-hidden">
               <div
-                className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${testimonials[currentTestimonial].color} opacity-10 rounded-full blur-3xl`}
+                className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${testimonials[currentTestimonial].color} opacity-20 rounded-full blur-3xl`}
               />
 
               <div className="relative">
@@ -320,7 +291,6 @@ export default function TestimonialsSuccessMetrics() {
                     }`}
                   >
                     <div className="grid lg:grid-cols-3 gap-8 items-center">
-                      {/* Left side - User info */}
                       <div className="text-center lg:text-left space-y-6">
                         <div className="inline-flex lg:flex flex-col items-center lg:items-start gap-4">
                           <div
@@ -328,24 +298,21 @@ export default function TestimonialsSuccessMetrics() {
                           >
                             {testimonial.image}
                           </div>
-
                           <div>
-                            <h3 className="text-2xl font-bold text-white mb-1">
+                            <h3 className="text-2xl font-bold text-black mb-1">
                               {testimonial.name}
                             </h3>
-                            <p className="text-slate-400 font-medium mb-2">
+                            <p className="text-gray-700 font-medium mb-2">
                               {testimonial.role}
                             </p>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-700/50 border border-slate-600/50">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20">
                               <CheckCircle className="w-4 h-4 text-emerald-400" />
-                              <span className="text-sm text-slate-300">
+                              <span className="text-sm text-gray-700">
                                 {testimonial.service}
                               </span>
                             </div>
                           </div>
                         </div>
-
-                        {/* Rating */}
                         <div className="flex justify-center lg:justify-start gap-1">
                           {[...Array(testimonial.rating)].map((_, i) => (
                             <Star
@@ -354,26 +321,21 @@ export default function TestimonialsSuccessMetrics() {
                             />
                           ))}
                         </div>
-
-                        {/* Location */}
-                        <div className="text-sm text-slate-500">
+                        <div className="text-sm text-gray-500">
                           {testimonial.location}
                         </div>
                       </div>
 
-                      {/* Right side - Quote */}
                       <div className="lg:col-span-2 space-y-6">
-                        <Quote className="w-12 h-12 text-violet-400/30" />
-
-                        <blockquote className="text-xl lg:text-2xl text-slate-200 leading-relaxed font-light italic">
+                        <Quote className="w-12 h-12 text-black/30" />
+                        <blockquote className="text-xl lg:text-2xl text-black/80 leading-relaxed font-light italic">
                           "{testimonial.quote}"
                         </blockquote>
-
                         <div
-                          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${testimonial.color} bg-opacity-20 border border-white/10`}
+                          className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${testimonial.color} bg-opacity-30 border border-white/20`}
                         >
-                          <TrendingUp className="w-4 h-4 text-white" />
-                          <span className="text-sm font-semibold text-white">
+                          <TrendingUp className="w-4 h-4 text-black" />
+                          <span className="text-sm font-semibold text-black">
                             {testimonial.highlight}
                           </span>
                         </div>
@@ -386,18 +348,16 @@ export default function TestimonialsSuccessMetrics() {
               {/* Navigation arrows */}
               <button
                 onClick={prevTestimonial}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-700/50 backdrop-blur-md border border-slate-600/50 flex items-center justify-center hover:bg-slate-600/50 transition-all duration-300 group"
-                aria-label="Previous testimonial"
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
               >
-                <ChevronLeft className="w-6 h-6 text-slate-300 group-hover:text-white group-hover:scale-110 transition-all" />
+                <ChevronLeft className="w-6 h-6 text-black group-hover:text-white transition-all" />
               </button>
 
               <button
                 onClick={nextTestimonial}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-700/50 backdrop-blur-md border border-slate-600/50 flex items-center justify-center hover:bg-slate-600/50 transition-all duration-300 group"
-                aria-label="Next testimonial"
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
               >
-                <ChevronRight className="w-6 h-6 text-slate-300 group-hover:text-white group-hover:scale-110 transition-all" />
+                <ChevronRight className="w-6 h-6 text-black group-hover:text-white transition-all" />
               </button>
             </div>
 
@@ -409,32 +369,13 @@ export default function TestimonialsSuccessMetrics() {
                   onClick={() => setCurrentTestimonial(index)}
                   className={`transition-all duration-500 rounded-full ${
                     index === currentTestimonial
-                      ? "w-12 h-3 bg-gradient-to-r from-violet-500 to-purple-500"
-                      : "w-3 h-3 bg-slate-600 hover:bg-slate-500"
+                      ? "w-12 h-3 bg-gradient-to-r from-violet-400 to-purple-400"
+                      : "w-3 h-3 bg-gray-300 hover:bg-gray-400"
                   }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Bottom CTA */}
-        <div
-          className={`text-center mt-16 transition-all duration-1000 delay-600 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <p className="text-slate-400 mb-6 text-lg">
-            Join thousands of satisfied families today
-          </p>
-          <button className="group relative px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 rounded-full font-bold text-white shadow-2xl hover:shadow-violet-500/50 transition-all duration-300 hover:scale-105 overflow-hidden">
-            <span className="relative z-10 flex items-center gap-2">
-              Start Your Journey
-              <TrendingUp className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-violet-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </button>
         </div>
       </div>
 

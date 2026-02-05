@@ -75,6 +75,7 @@ const Booking = () => {
       bookingStatus: "Pending",
       createdAt: new Date(),
       email: user?.email,
+      serviceId: service._id,
     };
     setLoading(true);
 

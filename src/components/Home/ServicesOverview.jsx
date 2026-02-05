@@ -22,21 +22,15 @@ export default function ServicesOverview() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1 },
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    if (sectionRef.current) observer.observe(sectionRef.current);
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
     };
   }, []);
 
@@ -46,11 +40,11 @@ export default function ServicesOverview() {
       name: "Baby Care",
       title: "Professional Baby Care Services",
       description:
-        "Expert care for your little ones with certified nannies and babysitters who understand infant and toddler development.",
+        "Expert care for your little ones with certified nannies and babysitters.",
       icon: Baby,
       image: "👶",
-      color: "from-pink-500 via-rose-500 to-red-500",
-      bgGradient: "from-pink-50 to-rose-50",
+      color: "from-[var(--gradient-start)] to-[var(--gradient-end)]",
+      bgGradient: "from-[var(--surface)] to-white",
       features: [
         { text: "Certified & CPR-trained caregivers", icon: Shield },
         { text: "Newborn to toddler specialists", icon: Baby },
@@ -62,7 +56,6 @@ export default function ServicesOverview() {
         "Playtime & development activities",
         "Sleep routine management",
         "Safety monitoring",
-        "Age-appropriate engagement",
         "Parent communication",
       ],
       stats: { caregivers: "2,000+", experience: "10+ years", rating: "4.9/5" },
@@ -72,11 +65,11 @@ export default function ServicesOverview() {
       name: "Elderly Service",
       title: "Compassionate Elderly Care",
       description:
-        "Dignified and respectful care for seniors, helping them maintain independence while ensuring safety and companionship.",
+        "Respectful care for seniors, ensuring safety, dignity, and companionship.",
       icon: HeartPulse,
       image: "👴",
-      color: "from-blue-500 via-indigo-500 to-purple-500",
-      bgGradient: "from-blue-50 to-indigo-50",
+      color: "from-[var(--accent)] to-[var(--secondary)]",
+      bgGradient: "from-[var(--surface)] to-white",
       features: [
         { text: "Experienced senior care specialists", icon: Star },
         { text: "Medication reminders", icon: Clock },
@@ -86,7 +79,6 @@ export default function ServicesOverview() {
       includes: [
         "Personal care & hygiene",
         "Meal preparation",
-        "Light housekeeping",
         "Medication management",
         "Transportation support",
         "Social engagement",
@@ -95,26 +87,25 @@ export default function ServicesOverview() {
     },
     {
       id: 3,
-      name: "Sick People Service",
+      name: "Medical Home Care",
       title: "Medical Home Care Support",
       description:
-        "Specialized care for individuals recovering from illness or managing chronic conditions, with trained medical support staff.",
+        "Professional home medical care for recovery and chronic conditions.",
       icon: Stethoscope,
       image: "🏥",
-      color: "from-emerald-500 via-teal-500 to-cyan-500",
-      bgGradient: "from-emerald-50 to-teal-50",
+      color: "from-[var(--secondary)] to-[var(--brand-purple)]",
+      bgGradient: "from-[var(--surface)] to-white",
       features: [
         { text: "Medically trained caregivers", icon: Stethoscope },
         { text: "Post-surgery recovery support", icon: HeartPulse },
-        { text: "Chronic condition management", icon: Calendar },
-        { text: "Health monitoring", icon: CheckCircle },
+        { text: "Health monitoring", icon: Calendar },
+        { text: "Emergency response", icon: CheckCircle },
       ],
       includes: [
         "Vital signs monitoring",
         "Wound care assistance",
-        "Physical therapy support",
         "Medication administration",
-        "Doctor appointment coordination",
+        "Doctor coordination",
         "Emergency response",
       ],
       stats: { caregivers: "1,200+", experience: "12+ years", rating: "4.9/5" },
@@ -127,13 +118,13 @@ export default function ServicesOverview() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-b from-white via-slate-50 to-white"
+      className="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-b from-white via-[var(--surface)] to-white"
     >
       {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-pink-200/20 to-rose-200/20 rounded-full blur-3xl animate-float" />
-        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-indigo-200/20 rounded-full blur-3xl animate-float-delayed" />
-        <div className="absolute -bottom-40 right-1/4 w-96 h-96 bg-gradient-to-br from-emerald-200/20 to-teal-200/20 rounded-full blur-3xl animate-float" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-[var(--accent)]/20 to-[var(--secondary)]/20 rounded-full blur-3xl animate-float" />
+        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-gradient-to-br from-[var(--primary)]/20 to-[var(--accent)]/20 rounded-full blur-3xl animate-float-delayed" />
+        <div className="absolute -bottom-40 right-1/4 w-96 h-96 bg-gradient-to-br from-[var(--secondary)]/20 to-[var(--brand-purple)]/20 rounded-full blur-3xl animate-float" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
@@ -143,30 +134,30 @@ export default function ServicesOverview() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-gradient-to-r from-violet-100 to-purple-100 border border-violet-200/50">
-            <Star className="w-4 h-4 text-violet-600" fill="currentColor" />
-            <span className="text-sm font-bold text-violet-900 tracking-wider uppercase">
+          <div className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full bg-accent/10 border border-accent/30">
+            <Star className="w-4 h-4 text-accent" fill="currentColor" />
+            <span className="text-sm font-bold text-accent tracking-wider uppercase">
               Our Services
             </span>
           </div>
 
           <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--foreground)] to-[var(--primary)] bg-clip-text text-transparent">
               Specialized Care for
             </span>
             <br />
-            <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--accent)] to-[var(--secondary)] bg-clip-text text-transparent">
               Every Family Member
             </span>
           </h2>
 
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             Professional, compassionate caregiving services tailored to your
-            familys unique needs
+            family's unique needs
           </p>
         </div>
 
-        {/* Service Navigation Tabs */}
+        {/* Service Tabs */}
         <div
           className={`flex flex-col sm:flex-row justify-center gap-4 mb-12 transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -180,19 +171,21 @@ export default function ServicesOverview() {
                 onClick={() => setActiveService(index)}
                 className={`group relative px-8 py-4 rounded-2xl font-semibold transition-all duration-500 ${
                   activeService === index
-                    ? `bg-gradient-to-r ${service.color} text-white shadow-2xl scale-105`
-                    : "bg-white text-slate-700 hover:bg-slate-50 shadow-md hover:shadow-xl border border-slate-200"
+                    ? "bg-gradient-primary text-white shadow-brand-lg scale-105"
+                    : "bg-card text-foreground hover:bg-muted border border-border"
                 }`}
               >
                 <div className="flex items-center gap-3">
                   <Icon
-                    className={`w-5 h-5 ${activeService === index ? "animate-pulse" : ""}`}
+                    className={`w-5 h-5 ${
+                      activeService === index ? "animate-pulse" : ""
+                    }`}
                   />
                   <span>{service.name}</span>
                 </div>
                 {activeService === index && (
                   <div
-                    className={`absolute inset-0 bg-gradient-to-r ${service.color} rounded-2xl blur-xl opacity-50 -z-10`}
+                    className={`absolute inset-0 bg-gradient-primary rounded-2xl blur-xl opacity-50 -z-10`}
                   />
                 )}
               </button>
@@ -217,11 +210,11 @@ export default function ServicesOverview() {
             >
               {activeService === index && (
                 <div className="grid lg:grid-cols-2 gap-12 items-start">
-                  {/* Left Column - Main Info */}
+                  {/* Left Column */}
                   <div className="space-y-8">
-                    {/* Service Header Card */}
+                    {/* Service Card */}
                     <div
-                      className={`bg-gradient-to-br ${service.bgGradient} rounded-3xl p-8 border border-slate-200 shadow-xl`}
+                      className={`bg-gradient-to-br ${service.bgGradient} rounded-3xl p-8 border border-border shadow-xl`}
                     >
                       <div className="flex items-start gap-6 mb-6">
                         <div
@@ -230,7 +223,7 @@ export default function ServicesOverview() {
                           {service.image}
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-3xl font-bold text-slate-900 mb-2">
+                          <h3 className="text-3xl font-bold text-foreground mb-2">
                             {service.title}
                           </h3>
                           <p className="text-slate-600 leading-relaxed">
@@ -241,40 +234,26 @@ export default function ServicesOverview() {
 
                       {/* Stats */}
                       <div className="grid grid-cols-3 gap-4">
-                        <div className="text-center p-4 bg-white/70 rounded-xl backdrop-blur-sm">
-                          <div className="text-2xl font-bold text-slate-900">
-                            {service.stats.caregivers}
+                        {Object.entries(service.stats).map(([key, val]) => (
+                          <div
+                            key={key}
+                            className="text-center p-4 bg-white/70 rounded-xl backdrop-blur-sm"
+                          >
+                            <div className="text-2xl font-bold text-foreground">
+                              {val}
+                            </div>
+                            <div className="text-xs text-slate-600 font-medium capitalize">
+                              {key}
+                            </div>
                           </div>
-                          <div className="text-xs text-slate-600 font-medium">
-                            Caregivers
-                          </div>
-                        </div>
-                        <div className="text-center p-4 bg-white/70 rounded-xl backdrop-blur-sm">
-                          <div className="text-2xl font-bold text-slate-900">
-                            {service.stats.experience}
-                          </div>
-                          <div className="text-xs text-slate-600 font-medium">
-                            Experience
-                          </div>
-                        </div>
-                        <div className="text-center p-4 bg-white/70 rounded-xl backdrop-blur-sm">
-                          <div className="text-2xl font-bold text-slate-900">
-                            {service.stats.rating}
-                          </div>
-                          <div className="text-xs text-slate-600 font-medium">
-                            Rating
-                          </div>
-                        </div>
+                        ))}
                       </div>
                     </div>
 
                     {/* Key Features */}
-                    <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-xl">
-                      <h4 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                        <Star
-                          className="w-5 h-5 text-amber-500"
-                          fill="currentColor"
-                        />
+                    <div className="bg-card rounded-3xl p-8 border border-border shadow-xl">
+                      <h4 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+                        <Star className="w-5 h-5 text-accent" />
                         Key Features
                       </h4>
                       <div className="grid gap-4">
@@ -283,14 +262,14 @@ export default function ServicesOverview() {
                           return (
                             <div
                               key={idx}
-                              className="flex items-center gap-4 p-4 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors duration-300"
+                              className="flex items-center gap-4 p-4 rounded-xl bg-muted hover:bg-surface transition-colors duration-300"
                             >
                               <div
                                 className={`w-10 h-10 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center flex-shrink-0`}
                               >
                                 <FeatureIcon className="w-5 h-5 text-white" />
                               </div>
-                              <span className="font-medium text-slate-700">
+                              <span className="font-medium text-foreground">
                                 {feature.text}
                               </span>
                             </div>
@@ -300,34 +279,34 @@ export default function ServicesOverview() {
                     </div>
                   </div>
 
-                  {/* Right Column - Includes */}
+                  {/* Right Column */}
                   <div className="space-y-8">
-                    <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-xl">
-                      <h4 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-emerald-500" />
+                    {/* Includes */}
+                    <div className="bg-card rounded-3xl p-8 border border-border shadow-xl">
+                      <h4 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+                        <CheckCircle className="w-5 h-5 text-accent" />
                         Service Includes
                       </h4>
                       <div className="space-y-3">
                         {service.includes.map((item, idx) => (
                           <div
                             key={idx}
-                            className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors duration-300"
-                            style={{ animationDelay: `${idx * 50}ms` }}
+                            className="flex items-start gap-3 p-3 rounded-xl hover:bg-muted transition-colors duration-300"
                           >
                             <div
                               className={`w-6 h-6 rounded-full bg-gradient-to-br ${service.color} flex items-center justify-center flex-shrink-0 mt-0.5`}
                             >
                               <CheckCircle className="w-4 h-4 text-white" />
                             </div>
-                            <span className="text-slate-700">{item}</span>
+                            <span className="text-foreground">{item}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    {/* CTA Card */}
+                    {/* CTA */}
                     <div
-                      className={`bg-gradient-to-br ${service.color} rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden`}
+                      className={`bg-gradient-primary rounded-3xl p-8 text-white shadow-brand-lg relative overflow-hidden`}
                     >
                       <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl" />
                       <div className="relative">
@@ -338,7 +317,7 @@ export default function ServicesOverview() {
                           Find the perfect caregiver for your family today
                         </p>
                         <div className="flex flex-col sm:flex-row gap-3">
-                          <button className="group px-6 py-3 bg-white text-slate-900 rounded-xl font-bold hover:scale-105 transition-all duration-300 shadow-xl flex items-center justify-center gap-2">
+                          <button className="group px-6 py-3 bg-white text-foreground rounded-xl font-bold hover:scale-105 transition-all duration-300 shadow-xl flex items-center justify-center gap-2">
                             Book Now
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                           </button>
@@ -355,7 +334,7 @@ export default function ServicesOverview() {
           ))}
         </div>
 
-        {/* Bottom Trust Indicators */}
+        {/* Trust Indicators */}
         <div
           className={`mt-20 grid grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-1000 delay-400 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -371,12 +350,12 @@ export default function ServicesOverview() {
             return (
               <div
                 key={index}
-                className="flex flex-col items-center text-center p-6 bg-white rounded-2xl border border-slate-200 shadow-md hover:shadow-xl transition-all duration-300"
+                className="flex flex-col items-center text-center p-6 bg-card rounded-2xl border border-border shadow-md hover:shadow-xl transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center mb-3">
-                  <Icon className="w-6 h-6 text-violet-600" />
+                <div className="w-12 h-12 rounded-full bg-accent/15 flex items-center justify-center mb-3">
+                  <Icon className="w-6 h-6 text-accent" />
                 </div>
-                <span className="font-semibold text-slate-800">
+                <span className="font-semibold text-foreground">
                   {item.label}
                 </span>
               </div>
@@ -385,6 +364,7 @@ export default function ServicesOverview() {
         </div>
       </div>
 
+      {/* Floating Animations */}
       <style jsx>{`
         @keyframes float {
           0%,
@@ -395,7 +375,6 @@ export default function ServicesOverview() {
             transform: translateY(-20px);
           }
         }
-
         @keyframes float-delayed {
           0%,
           100% {
@@ -405,11 +384,9 @@ export default function ServicesOverview() {
             transform: translateY(-15px);
           }
         }
-
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
-
         .animate-float-delayed {
           animation: float-delayed 8s ease-in-out infinite;
           animation-delay: 1s;

@@ -1,14 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Heart,
-  Shield,
-  Users,
-  Sparkles,
-} from "lucide-react";
+import { Heart, Shield, Users, Sparkles, ArrowRight } from "lucide-react";
 
 export default function Banner() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -20,48 +13,44 @@ export default function Banner() {
       title: "Empowering Care",
       subtitle: "AI-Driven Solutions",
       description:
-        "Transform caregiving with intelligent support systems that understand and adapt to unique needs",
+        "Transform caregiving with intelligent support systems that adapt to unique needs.",
       icon: Heart,
-      gradient: "from-rose-500 via-pink-500 to-fuchsia-600",
-      bgPattern:
-        "radial-gradient(circle at 20% 50%, rgba(236, 72, 153, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(217, 70, 239, 0.2) 0%, transparent 50%)",
-      accentColor: "rose",
+      gradient: "from-[var(--gradient-start)] to-[var(--gradient-end)]",
+      image:
+        "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1000&auto=format&fit=crop",
     },
     {
       id: 2,
       title: "Protected & Secure",
       subtitle: "Advanced Monitoring",
       description:
-        "24/7 AI-powered safety monitoring ensures peace of mind for families and caregivers",
+        "24/7 AI-powered safety monitoring ensures peace of mind for families.",
       icon: Shield,
-      gradient: "from-blue-500 via-cyan-500 to-teal-600",
-      bgPattern:
-        "radial-gradient(circle at 70% 30%, rgba(6, 182, 212, 0.3) 0%, transparent 50%), radial-gradient(circle at 30% 70%, rgba(20, 184, 166, 0.2) 0%, transparent 50%)",
-      accentColor: "cyan",
+      gradient: "from-[var(--brand-blue)] to-[var(--brand-purple)]",
+      image:
+        "https://images.unsplash.com/photo-1581056771107-24ca5f033842?q=80&w=1000&auto=format&fit=crop",
     },
     {
       id: 3,
       title: "Connected Care",
       subtitle: "Community Support",
       description:
-        "Build stronger connections between caregivers, families, and care recipients through AI collaboration",
+        "Build stronger connections between caregivers and families through collaboration.",
       icon: Users,
-      gradient: "from-violet-500 via-purple-500 to-indigo-600",
-      bgPattern:
-        "radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.3) 0%, transparent 50%), radial-gradient(circle at 60% 40%, rgba(99, 102, 241, 0.2) 0%, transparent 50%)",
-      accentColor: "purple",
+      gradient: "from-[var(--brand-purple)] to-[var(--accent)]",
+      image:
+        "https://images.unsplash.com/photo-1576765608596-78e53a3044a4?q=80&w=1000&auto=format&fit=crop",
     },
     {
       id: 4,
       title: "Intelligent Insights",
       subtitle: "Predictive Analytics",
       description:
-        "Harness the power of AI to anticipate needs and optimize care delivery",
+        "Harness the power of AI to anticipate needs and optimize care delivery.",
       icon: Sparkles,
-      gradient: "from-amber-500 via-orange-500 to-red-600",
-      bgPattern:
-        "radial-gradient(circle at 50% 50%, rgba(251, 146, 60, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(239, 68, 68, 0.2) 0%, transparent 50%)",
-      accentColor: "orange",
+      gradient: "from-[var(--accent)] to-[var(--secondary)]",
+      image:
+        "https://images.unsplash.com/photo-1530213786676-41ad9f7736f6?q=80&w=1000&auto=format&fit=crop",
     },
   ];
 
@@ -69,11 +58,9 @@ export default function Banner() {
 
   useEffect(() => {
     if (!isAutoPlaying) return;
-
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 2000);
-
+    }, 5000);
     return () => clearInterval(interval);
   }, [isAutoPlaying, totalSlides]);
 
@@ -82,180 +69,119 @@ export default function Banner() {
     setIsAutoPlaying(false);
   };
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    setIsAutoPlaying(false);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-    setIsAutoPlaying(false);
-  };
-
-  const currentSlideData = slides[currentSlide];
-  const Icon = currentSlideData.icon;
-
   return (
-    <div className="relative max-w-7xl mx-auto h-screen overflow-hidden">
-      {/* Animated background pattern */}
-      <div
-        className="absolute inset-0 opacity-40 transition-all duration-1000"
-        style={{ background: currentSlideData.bgPattern }}
-      />
+    <section className="relative max-w-7xl mx-auto flex items-center overflow-hidden bg-background py-10">
+      {/* Decorative blurred accents */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px]" />
+      </div>
 
-      {/* Grid overlay */}
-      <div
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-
-      {/* Main content container */}
-      <div className="relative h-full flex items-center justify-center px-5 md:px-7">
-        <div className=" w-full">
-          {/* Slide content */}
-          <div className="relative">
-            {slides.map((slide, index) => {
-              const SlideIcon = slide.icon;
-              return (
-                <div
-                  key={slide.id}
-                  className={`absolute inset-0 transition-all duration-700 ${
-                    index === currentSlide
-                      ? "opacity-100 translate-x-0"
-                      : index < currentSlide
-                        ? "opacity-0 -translate-x-12"
-                        : "opacity-0 translate-x-12"
-                  }`}
-                  style={{
-                    position: index === currentSlide ? "relative" : "absolute",
-                  }}
-                >
-                  {/* Icon floating animation */}
-                  <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-
-                    {/* Text content */}
-                    <div className="flex-1 text-center lg:text-left max-w-2xl">
-                      {/* Subtitle */}
-                      <div
-                        className={`inline-block mb-4 px-4 py-2 rounded-full bg-gradient-to-r ${slide.gradient} bg-opacity-20 border border-white/10 backdrop-blur-sm`}
-                      >
-                        <span className="text-sm font-semibold text-white/90 tracking-wider uppercase">
-                          {slide.subtitle}
-                        </span>
-                      </div>
-
-                      {/* Title */}
-                      <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                        <span
-                          className={`bg-gradient-to-r ${slide.gradient} bg-clip-text text-transparent animate-gradient`}
-                        >
-                          {slide.title}
-                        </span>
-                      </h1>
-
-                      {/* Description */}
-                      <p className="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8 max-w-xl">
-                        {slide.description}
-                      </p>
-
-                      {/* CTA Buttons */}
-                      <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <button
-                          className={`group px-8 py-4 bg-gradient-to-r ${slide.gradient} rounded-full font-semibold text-white shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden`}
-                        >
-                          <span className="relative z-10">Get Started</span>
-                          <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-                        </button>
-                        <button className="px-8 py-4 border-2 border-white/20 rounded-full font-semibold text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300 backdrop-blur-sm">
-                          Learn More
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+      <div className="container px-5 md:px-7 mx-auto relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Side: Content */}
+          <div className="relative min-h-[230px] md:h-auto flex flex-col justify-center">
+            {slides.map((slide, index) => (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-all duration-700 ease-out ${
+                  index === currentSlide
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-6 pointer-events-none"
+                }`}
+              >
+                <div className="inline-flex items-center gap-2 badgePrimary mb-6 animate-fade-in">
+                  <slide.icon size={16} />
+                  <span className="text-xs font-bold uppercase tracking-widest">
+                    {slide.subtitle}
+                  </span>
                 </div>
-              );
-            })}
+
+                <h1 className="text-2xl md:text-5xl font-extrabold mb-6 leading-[1.1]">
+                  {slide.title.split(" ")[0]} <br />
+                  <span className="textGradient">
+                    {slide.title.split(" ").slice(1).join(" ")}
+                  </span>
+                </h1>
+
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-lg">
+                  {slide.description}
+                </p>
+
+                <div className="flex flex-wrap gap-4">
+                  <button className="btnPrimary flex items-center gap-2 group">
+                    Get Started{" "}
+                    <ArrowRight
+                      size={18}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </button>
+                  <button className="btnOutline">Learn More</button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Right Side: Image */}
+          <div className="relative hidden lg:block h-100">
+            {slides.map((slide, index) => (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-all duration-700 ease-out ${
+                  index === currentSlide
+                    ? "opacity-100 scale-100 rotate-0"
+                    : "opacity-0 scale-95 rotate-2 pointer-events-none"
+                }`}
+              >
+                <div className="relative w-full h-full rounded-[2rem] overflow-hidden border-4 border-border shadow-brand-lg">
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+                </div>
+
+                {/* Floating card */}
+                <div className="cardGlass absolute bottom-8 -left-12 max-w-[240px] shadow-xl animate-slide-up">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div
+                      className={`p-2 rounded-lg bg-gradient-to-br ${slide.gradient} text-white`}
+                    >
+                      <slide.icon size={20} />
+                    </div>
+                    <span className="font-bold text-sm">Safe Care</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Live AI monitoring enabled for this session.
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Indicators */}
+        <div className="md:mt-7 mt-25 justify-center flex gap-4">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className="py-4"
+            >
+              <div className="h-1.5 w-12 md:w-20 bg-muted rounded-full overflow-hidden relative">
+                <div
+                  className={`absolute h-full transition-all duration-500 ${
+                    index === currentSlide
+                      ? "w-full bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] shadow-brand"
+                      : "w-0"
+                  }`}
+                />
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
-
-     
-
-      {/* Slide indicators */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-3 z-10">
-        {slides.map((slide, index) => (
-          <button
-            key={slide.id}
-            onClick={() => goToSlide(index)}
-            className="group relative"
-            aria-label={`Go to slide ${index + 1}`}
-          >
-            <div
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                index === currentSlide
-                  ? "w-12 bg-gradient-to-r " + slide.gradient
-                  : "w-8 bg-white/30 hover:bg-white/50"
-              }`}
-            />
-            {index === currentSlide && (
-              <div
-                className={`absolute inset-0 bg-gradient-to-r ${slide.gradient} blur-md opacity-50 rounded-full`}
-              />
-            )}
-          </button>
-        ))}
-      </div>
-
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-
-        @keyframes gradient {
-          0%,
-          100% {
-            background-size: 200% 200%;
-            background-position: left center;
-          }
-          50% {
-            background-size: 200% 200%;
-            background-position: right center;
-          }
-        }
-
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.6;
-          }
-        }
-
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        .animate-gradient {
-          animation: gradient 8s ease infinite;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
-        }
-      `}</style>
-    </div>
+    </section>
   );
 }

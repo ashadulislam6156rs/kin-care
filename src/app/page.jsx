@@ -16,7 +16,7 @@ export default function Home() {
           height={20}
           priority
         /> */}
-        <section className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+        <section className="">
           <Banner></Banner>
           <AboutMissionSection></AboutMissionSection>
           <ServicesOverview></ServicesOverview>
