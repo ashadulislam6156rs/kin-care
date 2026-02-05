@@ -118,7 +118,7 @@ export default function ServicesOverview() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-b from-white via-[var(--surface)] to-white"
+      className="relative py-7 md:py-15 overflow-hidden bg-gradient-to-b from-white via-[var(--surface)] to-white"
     >
       {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -141,7 +141,7 @@ export default function ServicesOverview() {
             </span>
           </div>
 
-          <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="bg-gradient-to-r from-[var(--foreground)] to-[var(--primary)] bg-clip-text text-transparent">
               Specialized Care for
             </span>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Heart, Shield, Users, Sparkles, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export default function Banner() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -39,7 +40,7 @@ export default function Banner() {
       icon: Users,
       gradient: "from-[var(--brand-purple)] to-[var(--accent)]",
       image:
-        "https://images.unsplash.com/photo-1576765608596-78e53a3044a4?q=80&w=1000&auto=format&fit=crop",
+        "https://i.pinimg.com/736x/85/a7/32/85a7326b0ac3a140dbd54e3baa73b80f.jpg",
     },
     {
       id: 4,
@@ -70,7 +71,7 @@ export default function Banner() {
   };
 
   return (
-    <section className="relative max-w-7xl mx-auto flex items-center overflow-hidden bg-background py-10">
+    <section className="relative max-w-7xl mx-auto flex items-center overflow-hidden bg-background py-7 md:py-15">
       {/* Decorative blurred accents */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px]" />
@@ -78,9 +79,9 @@ export default function Banner() {
       </div>
 
       <div className="container px-5 md:px-7 mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 ">
           {/* Left Side: Content */}
-          <div className="relative min-h-[230px] md:h-auto flex flex-col justify-center">
+          <div className="relative min-h-50 md:h-auto flex flex-col justify-center">
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
@@ -97,7 +98,7 @@ export default function Banner() {
                   </span>
                 </div>
 
-                <h1 className="text-2xl md:text-5xl font-extrabold mb-6 leading-[1.1]">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-[1.1]">
                   {slide.title.split(" ")[0]} <br />
                   <span className="textGradient">
                     {slide.title.split(" ").slice(1).join(" ")}
@@ -134,25 +135,28 @@ export default function Banner() {
                 }`}
               >
                 <div className="relative w-full h-full rounded-[2rem] overflow-hidden border-4 border-border shadow-brand-lg">
-                  <img
+                  <Image
                     src={slide.image}
                     alt={slide.title}
+                    fill
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
                 </div>
 
                 {/* Floating card */}
-                <div className="cardGlass absolute bottom-8 -left-12 max-w-[240px] shadow-xl animate-slide-up">
+                <div className="cardGlass bg-white/60 text-white absolute bottom-8 -left-12 max-w-[240px] shadow-xl animate-slide-up">
                   <div className="flex items-center gap-3 mb-2">
                     <div
                       className={`p-2 rounded-lg bg-gradient-to-br ${slide.gradient} text-white`}
                     >
                       <slide.icon size={20} />
                     </div>
-                    <span className="font-bold text-sm">Safe Care</span>
+                    <span className="font-bold text-accent text-sm">
+                      Safe Care
+                    </span>
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs font-medium text-accent">
                     Live AI monitoring enabled for this session.
                   </p>
                 </div>
@@ -162,7 +166,7 @@ export default function Banner() {
         </div>
 
         {/* Indicators */}
-        <div className="md:mt-7 mt-25 justify-center flex gap-4">
+        <div className="md:mt-10 mt-25 justify-center flex gap-4">
           {slides.map((_, index) => (
             <button
               key={index}

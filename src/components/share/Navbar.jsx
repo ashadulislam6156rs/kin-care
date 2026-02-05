@@ -25,7 +25,7 @@ const Navbar = () => {
 const menuItems = [
   { title: "Home", url: "/", isPrivate: false },
   { title: "Services", url: "/services", isPrivate: false },
-  { title: "Booking", url: "/booking", isPrivate: true },
+  { title: "Bookings", url: "/bookings", isPrivate: true },
   { title: "My Bookings", url: "/my-bookings", isPrivate: true },
   { title: "About", url: "/about", isPrivate: false },
 ];
