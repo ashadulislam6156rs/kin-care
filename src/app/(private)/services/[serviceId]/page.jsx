@@ -26,7 +26,7 @@ const ServicesDetails =  () => {
 
   const handleBookNow = () => {
     if (isAuthenticated) {
-      router.push(`/booking/${service._id}`);
+      router.push(`/bookings/${service._id}`);
     }
     else {
       router.push("/login");

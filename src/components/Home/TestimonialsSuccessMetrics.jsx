@@ -193,9 +193,9 @@ export default function TestimonialsSuccessMetrics() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 lg:py-32 overflow-hidden"
+      className="relative py-7 md:py-15 overflow-hidden"
     >
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-5 md:px-7">
         {/* Section Header */}
         <div
           className={`text-center mb-20 transition-all duration-1000 ${
@@ -209,7 +209,7 @@ export default function TestimonialsSuccessMetrics() {
             </span>
           </div>
 
-          <h2 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="text-black">Trusted by Thousands of</span>
             <br />
             <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -225,7 +225,7 @@ export default function TestimonialsSuccessMetrics() {
 
         {/* Success Metrics */}
         <div
-          className={`grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20 transition-all duration-1000 delay-200 ${
+          className={`grid grid-cols-1 md:grid-cols-4 gap-6 mb-20 transition-all duration-1000 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
@@ -241,12 +241,12 @@ export default function TestimonialsSuccessMetrics() {
             return (
               <div
                 key={metric.id}
-                className="group relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-gradient-to-br hover:from-violet-400 hover:to-pink-400 transition-all duration-500 hover:scale-105"
+                className="group shadow-md relative bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-gradient-to-br hover:from-violet-400 hover:to-pink-400 transition-all duration-500 hover:scale-105"
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${metric.color} opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity duration-500`}
                 />
-                <div className="relative">
+                <div className="relative flex flex-col items-center justify-center">
                   <div
                     className={`w-14 h-14 mb-4 rounded-xl bg-gradient-to-br ${metric.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500`}
                   >
@@ -275,7 +275,7 @@ export default function TestimonialsSuccessMetrics() {
           }`}
         >
           <div className="relative">
-            <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-white/20 shadow-2xl overflow-hidden">
+            <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 md:p-12 md:px-20 border border-white/20 shadow-2xl overflow-hidden">
               <div
                 className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${testimonials[currentTestimonial].color} opacity-20 rounded-full blur-3xl`}
               />
@@ -290,7 +290,7 @@ export default function TestimonialsSuccessMetrics() {
                         : "opacity-0 absolute inset-0 pointer-events-none"
                     }`}
                   >
-                    <div className="grid lg:grid-cols-3 gap-8 items-center">
+                    <div className="grid md:grid-cols-3 gap-8 items-center">
                       <div className="text-center lg:text-left space-y-6">
                         <div className="inline-flex lg:flex flex-col items-center lg:items-start gap-4">
                           <div
@@ -326,10 +326,10 @@ export default function TestimonialsSuccessMetrics() {
                         </div>
                       </div>
 
-                      <div className="lg:col-span-2 space-y-6">
+                      <div className="md:col-span-2 space-y-6">
                         <Quote className="w-12 h-12 text-black/30" />
                         <blockquote className="text-xl lg:text-2xl text-black/80 leading-relaxed font-light italic">
-                          "{testimonial.quote}"
+                          {testimonial.quote}
                         </blockquote>
                         <div
                           className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${testimonial.color} bg-opacity-30 border border-white/20`}
@@ -348,14 +348,14 @@ export default function TestimonialsSuccessMetrics() {
               {/* Navigation arrows */}
               <button
                 onClick={prevTestimonial}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
+                className="absolute hidden  cursor-pointer left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 md:flex items-center justify-center hover:bg-accent transition-all duration-300 group"
               >
                 <ChevronLeft className="w-6 h-6 text-black group-hover:text-white transition-all" />
               </button>
 
               <button
                 onClick={nextTestimonial}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-all duration-300 group"
+                className="absolute hidden right-4 cursor-pointer top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 md:flex items-center justify-center hover:bg-accent transition-all duration-300 group"
               >
                 <ChevronRight className="w-6 h-6 text-black group-hover:text-white transition-all" />
               </button>
