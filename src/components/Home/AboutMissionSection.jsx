@@ -87,7 +87,7 @@ export default function AboutMissionSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 lg:py-32 overflow-hidden bg-background"
+      className="relative py-10 md:py-15 overflow-hidden bg-background"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 -left-20 w-96 h-96 bg-[#657EFF]/10 rounded-full blur-3xl" />
@@ -95,7 +95,7 @@ export default function AboutMissionSection() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#221F3F]/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-5 md:px-7">
         <div
           className={`text-center mb-20 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -108,7 +108,7 @@ export default function AboutMissionSection() {
             </span>
           </div>
 
-          <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="text-foreground">Care Made </span>
             <span className="bg-gradient-to-r from-[#657EFF] to-[#9836FF] bg-clip-text text-transparent">
               Simple & Secure
@@ -147,7 +147,7 @@ export default function AboutMissionSection() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h3 className="text-3xl lg:text-4xl font-bold text-foreground">
-                Your Family's Safety Comes First
+                Your Family&apos;s Safety Comes First
               </h3>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 We focus on trust, transparency, and ease so you can find the
